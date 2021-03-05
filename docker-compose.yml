@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+
+
+  server-go-rmq:
+      image : alfonsomelgar/servergormq
+      build:
+        dockerfile : Dockerfile
+        context : ./ServerGoRabbit
+      ports:
+        - "3001:3001"
+      depends_on:
+        - rabbitmq
+
+  server-py-rmq:
+      image : alfonsomelgar/serverpyrmq
+      build:
+        dockerfile : Dockerfile
+        context : ./ServidorPythonRabbit
+      restart: on-failure
+      ports:
+        - "5000:5000"
+      depends_on:
+        - rabbitmq
+        - server-go-rmq
+  
+  rabbitmq:
+      image : rabbitmq:3-management
+      ports: 
+          - "5672:5672"
+          - "15672:15672"
