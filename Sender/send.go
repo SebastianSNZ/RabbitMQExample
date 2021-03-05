@@ -26,7 +26,7 @@ func newElement(w http.ResponseWriter, r *http.Request) {
 	data, err := json.Marshal(body)
 
 	// Connecting to server
-	conn, err := amqp.Dial("amqp://guest:guest@34.72.43.140:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	failOnError(err, "RabbitMQ connection")
 	defer conn.Close()
 

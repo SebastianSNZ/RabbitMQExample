@@ -17,7 +17,7 @@ func failOnError(err error, msg string) {
 
 func main() {
 	// Connecting to server
-	conn, err := amqp.Dial("amqp://guest:guest@34.72.43.140:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
@@ -57,7 +57,7 @@ func main() {
 			log.Printf("Received a message: %s", d.Body)
 
 			postBody := []byte(string(d.Body))
-			req, err := http.Post("http://localhost:5000/", "application/json", bytes.NewBuffer(postBody))
+			req, err := http.Post("http://mongo-server:5000/", "application/json", bytes.NewBuffer(postBody))
 			req.Header.Set("Content-Type", "application/json")
 			failOnError(err, "POST new document")
 
