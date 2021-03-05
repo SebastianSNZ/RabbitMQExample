@@ -11,14 +11,14 @@ services:
       build: ./Receiver
       depends_on:
         - rabbitmq
-        - server-go-rmq
+        - sender-rmq
         - mongo-server
 
   mongo-server:
       build: ./MongoServer
       depends_on:
         - rabbitmq
-        - server-go-rmq
+        - sender-rmq
         - mongo-server
   
   rabbitmq:
