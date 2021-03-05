@@ -1,5 +1,11 @@
 version: "3.3"
 services:
+  rabbitmq:
+      image : rabbitmq:3-management
+      ports: 
+          - "5672:5672"
+          - "15672:15672"
+
   sender-rmq:
       build: ./Sender
       ports:
@@ -9,20 +15,9 @@ services:
 
   receiver-rmq:
       build: ./Receiver
+      restart: on-failure
       depends_on:
         - rabbitmq
-        - sender-rmq
-        - mongo-server
 
   mongo-server:
       build: ./MongoServer
-      depends_on:
-        - rabbitmq
-        - sender-rmq
-        - mongo-server
-  
-  rabbitmq:
-      image : rabbitmq:3-management
-      ports: 
-          - "5672:5672"
-          - "15672:15672"

@@ -8,4 +8,4 @@ RUN go mod download
 
 EXPOSE 3000
 
-CMD ["go","run","receive.go"]
+CMD ["go", "run", "send.go"]
