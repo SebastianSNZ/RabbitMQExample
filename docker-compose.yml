@@ -6,14 +6,14 @@ services:
           - "5672:5672"
           - "15672:15672"
 
-  sender-rmq:
+  publisher-rmq:
       build: ./Sender
       ports:
         - "80:3000"
       depends_on:
         - rabbitmq
 
-  receiver-rmq:
+  consumer-rmq:
       build: ./Receiver
       restart: on-failure
       depends_on:

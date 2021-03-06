@@ -60,10 +60,9 @@ func main() {
 			req, err := http.Post("http://mongo-server:5000/", "application/json", bytes.NewBuffer(postBody))
 			req.Header.Set("Content-Type", "application/json")
 			failOnError(err, "POST new document")
-
 			defer req.Body.Close()
-			//Read the response body
 
+			//Read the response body
 			newBody, err := ioutil.ReadAll(req.Body)
 			failOnError(err, "Reading response from HTTP POST")
 			sb := string(newBody)

@@ -16,7 +16,7 @@ app.use(express.json({ limit: '5mb', extended: true }));
 app.post('/', async (req, res) => {
     const data = req.body;
     try {
-        let collection = db.collection("values");
+        let collection = db.collection("personita2");
         let result = await collection.insertOne(data);
         res.json(result.ops[0]);
     } catch (err) {
